@@ -11,11 +11,13 @@ const UsersList: React.FC<UsersListProps> = ({ formData }) => {
   return (
     <table>
       <thead>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>TargetHours</th>
-        <th>Payout</th>
-        <th>UserHourPayment</th>
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>TargetHours</th>
+          <th>Payout</th>
+          <th>UserHourPayment</th>
+        </tr>
       </thead>
       <tbody>
         {formData.map((user) => (
