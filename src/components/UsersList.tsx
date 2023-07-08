@@ -1,13 +1,13 @@
 import React from "react";
 import User from "./User";
 import { UserFormData } from "./EventsTraining";
-import uuid from "react-uuid";
 
 type UsersListProps = {
   formData: UserFormData[];
+  onDeleteUser: (userId: number) => void;
 };
 
-const UsersList: React.FC<UsersListProps> = ({ formData }) => {
+const UsersList: React.FC<UsersListProps> = ({ formData, onDeleteUser }) => {
   return (
     <table>
       <thead>
@@ -17,16 +17,19 @@ const UsersList: React.FC<UsersListProps> = ({ formData }) => {
           <th>TargetHours</th>
           <th>Payout</th>
           <th>UserHourPayment</th>
+          <th>Options</th>
         </tr>
       </thead>
       <tbody>
         {formData.map((user) => (
           <User
-            key={uuid()}
+            id={user.id}
+            key={user.id}
             name={user.name}
             surname={user.surname}
             targetHours={user.targetHours}
             userHourPayment={user.userHourPayment}
+            onDelete={onDeleteUser}
           />
         ))}
       </tbody>

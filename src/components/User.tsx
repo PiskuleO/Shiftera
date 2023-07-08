@@ -1,11 +1,21 @@
 import styled from "@emotion/styled";
-import { UserFormData } from "./EventsTraining";
 
-const User: React.FC<UserFormData> = ({
+type UserProps = {
+  id: number;
+  name: string;
+  surname: string;
+  targetHours: number;
+  userHourPayment: number;
+  onDelete: (userId: number) => void;
+};
+
+const User: React.FC<UserProps> = ({
+  id,
   name,
   surname,
   targetHours,
   userHourPayment,
+  onDelete,
 }) => {
   return (
     <Wrapper>
@@ -14,6 +24,9 @@ const User: React.FC<UserFormData> = ({
       <td>{targetHours}</td>
       <td>{targetHours * userHourPayment}</td>
       <td>{userHourPayment}</td>
+      <td>
+        <button onClick={() => onDelete(id)}>Delete</button>
+      </td>
     </Wrapper>
   );
 };

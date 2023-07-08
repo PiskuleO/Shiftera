@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import UsersList from "./UsersList";
 import styled from "@emotion/styled";
 
 export type UserFormData = {
+  id: number;
   name: string;
   surname: string;
   targetHours: number;
@@ -11,6 +12,7 @@ export type UserFormData = {
 
 const EventsTraining: React.FC = () => {
   const [currentValue, setCurrentValue] = useState<UserFormData>({
+    id: 0,
     name: "",
     surname: "",
     targetHours: 0,
@@ -19,8 +21,12 @@ const EventsTraining: React.FC = () => {
   const [UserFormData, setFormData] = useState<UserFormData[]>([]);
 
   const handleSubmit = () => {
-    setFormData((prevData) => [...prevData, currentValue]);
+    setFormData((prevData) => [
+      ...prevData,
+      { ...currentValue, id: prevData.length },
+    ]);
     setCurrentValue({
+      id: 0,
       name: "",
       surname: "",
       targetHours: 0,
@@ -32,16 +38,20 @@ const EventsTraining: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setCurrentValue((prevValue) => ({
-      ...prevValue,
+    setCurrentValue((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
+  };
+
+  const deleteUser = (userId: number) => {
+    setFormData((prevData) => prevData.filter((data) => data.id !== userId));
   };
 
   return (
     <div>
       <Background></Background>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Name:
           <input
@@ -74,13 +84,7 @@ const EventsTraining: React.FC = () => {
 
         <label>
           UserHourPayment:
-          <select
-            name="userHourPayment"
-            /*onChange={(e) => {
-              setHourPayment(parseInt(e.target.value));
-            }}*/
-            onChange={handleChange}
-          >
+          <select name="userHourPayment" onChange={handleChange}>
             <option value="0">0</option>
             <option value="100">100</option>
             <option value="150">150</option>
@@ -92,21 +96,13 @@ const EventsTraining: React.FC = () => {
         </label>
       </form>
       <button onClick={handleSubmit}>SEND</button>
-      <UsersList formData={UserFormData}></UsersList>
-      {/*formData.map((user) => (
-        <UsersList
-          key={uuid()}
-          name={user.name}
-          surname={user.surname}
-          targetHours={user.targetHours}
-        />
-      ))*/}
+      <UsersList formData={UserFormData} onDeleteUser={deleteUser}></UsersList>
     </div>
   );
 };
 
 const Background = styled.div`
-  background: linear-gradient(180deg, #7476fd 0%, #48e5da 100%);
+  background: white;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
