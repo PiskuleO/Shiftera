@@ -4,21 +4,44 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 
 const Navbar: React.FC = () => {
   return (
-    <header>
-      <NavbarWrapper>
-        Ahoj
+    <NavbarHeader>
+      <NavbarNav>
+        Shiftera
         <RightIcons>
           <Icon>
-            <NotificationsNoneOutlinedIcon sx={{ fontSize: 50 }} />
+            <NotificationsNoneOutlinedIcon sx={{ fontSize: 30 }} />
           </Icon>
           <Icon>
-            <AccountCircleOutlinedIcon sx={{ fontSize: 100 }} />
+            <AccountCircleOutlinedIcon sx={{ fontSize: 75 }} />
           </Icon>
         </RightIcons>
-      </NavbarWrapper>
-    </header>
+      </NavbarNav>
+    </NavbarHeader>
   );
 };
+const NavbarNav = styled.nav`
+  background: white;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  padding-top: 1rem;
+  --extra-padding-bottom: 2rem;
+  padding-bottom: calc(0.5rem + var(--extra-padding-bottom));
+  ::after {
+    content: " ";
+    background: linear-gradient(180deg, #7476fd 0%, #48e5da 100%);
+    height: 2px;
+    width: calc(100% - 2 * 10rem);
+    position: absolute;
+    bottom: var(--extra-padding-bottom);
+  }
+`;
 
 const Icon = styled.div`
   padding-left: 3rem;
@@ -33,27 +56,9 @@ const RightIcons = styled.div`
   justify-content: space-between;
 `;
 
-const NavbarWrapper = styled.nav`
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: center;
-  align-items: center;
-  padding-left: 10rem;
-  padding-right: 10rem;
-  padding-top: 1rem;
-  padding-bottom: 0.5rem;
-  position: relative;
-  ::after {
-    content: " ";
-    background: var(--bg, linear-gradient(180deg, #7476fd 0%, #48e5da 100%));
-    height: 2px;
-    width: calc(100% - 2 * 10rem);
-    position: absolute;
-    bottom: 0;
-  }
+const NavbarHeader = styled.header`
+  position: sticky;
+  top: 0;
 `;
 
 export default Navbar;

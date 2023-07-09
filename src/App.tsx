@@ -1,13 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import EventsTraining from "./components/EventsTraining";
-import Navbar from "./components/Navbar";
+import Layout from "./components/Layout";
+import Users from "./components/Users";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="events" element={<EventsTraining />} />
-        <Route path="navbar" element={<Navbar />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Users />} />
+          <Route path="users" element={<Users />} />
+        </Route>
+        <Route path="*" />
       </Routes>
     </BrowserRouter>
   );

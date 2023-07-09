@@ -1,6 +1,6 @@
 import React from "react";
 import User from "./User";
-import { UserFormData } from "./EventsTraining";
+import { UserFormData } from "./Users";
 
 type UsersListProps = {
   formData: UserFormData[];
