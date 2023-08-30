@@ -1,8 +1,44 @@
-import React, { useState } from "react";
-import UsersList from "./UsersList";
+import React, { FormEvent, useState } from "react";
+import UserList from "./UserList";
 import styled from "@emotion/styled";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import ReactModal from "react-modal";
+import { ClassNames } from "@emotion/react";
+
+const StyledModal = (props: ReactModal.Props) => (
+  <ClassNames>
+    {({ css }) => (
+      <ReactModal
+        {...props}
+        className={css`
+          display: flex;
+          justify-content: center;
+          flex-direction: row;
+          align-items: center;
+          position: absolute;
+          background: #fff;
+          -webkit-overflow-scrolling: touch;
+          border-radius: 15px;
+          padding: 20px;
+          box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.25);
+        `}
+        overlayClassName={css`
+          position: fixed;
+          display: flex;
+          justify-content: center;
+          flex-direction: row;
+          align-items: center;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(255, 255, 255, 0.75);
+        `}
+      ></ReactModal>
+    )}
+  </ClassNames>
+);
 
 export type UserFormData = {
   id: number;
@@ -10,29 +46,77 @@ export type UserFormData = {
   surname: string;
   targetHours: number;
   userHourPayment: number;
+  userPriority: number;
+};
+
+export type UserFormDataWithoutId = {
+  name: string;
+  surname: string;
+  targetHours: number;
+  userHourPayment: number;
+  userPriority: number;
 };
 
 const Users: React.FC = () => {
-  const [currentValue, setCurrentValue] = useState<UserFormData>({
-    id: 0,
+  const [currentValue, setCurrentValue] = useState<UserFormDataWithoutId>({
     name: "",
     surname: "",
     targetHours: 0,
     userHourPayment: 0,
+    userPriority: 0,
   });
-  const [UserFormData, setFormData] = useState<UserFormData[]>([]);
 
-  const handleSubmit = () => {
-    setFormData((prevData) => [
-      ...prevData,
-      { ...currentValue, id: prevData.length },
-    ]);
-    setCurrentValue({
+  const [userFormData, setFormData] = useState<UserFormData[]>([]);
+
+  const handleEditSubmit = (
+    e: FormEvent,
+    editUserID: number,
+    editedData: UserFormDataWithoutId
+  ) => {
+    setFormData(
+      userFormData.map((data) => {
+        if (data.id == editUserID) {
+          return {
+            ...data,
+            name: editedData.name,
+            surname: editedData.surname,
+            targetHours: editedData.targetHours,
+            userHourPayment: editedData.userHourPayment,
+            userPriority: editedData.userPriority,
+          };
+        }
+        return data;
+      })
+    );
+
+    e.preventDefault();
+    /*setCurrentEditedData({
       id: 0,
       name: "",
       surname: "",
       targetHours: 0,
       userHourPayment: 0,
+      userPriority: 0,
+    });*/
+  };
+
+  const editUser = (editedUserId: number) => {};
+
+  const [createUserModalState, setCreateUserModalState] =
+    useState<boolean>(false);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setFormData((prevData) => [
+      ...prevData,
+      { ...currentValue, id: prevData.length },
+    ]);
+    setCurrentValue({
+      name: "",
+      surname: "",
+      targetHours: 0,
+      userHourPayment: 0,
+      userPriority: 0,
     });
   };
 
@@ -46,15 +130,21 @@ const Users: React.FC = () => {
     }));
   };
 
+  //Edit udělat přes map() současného pole a nahradit data kde s shodují ID s dočasnou hodnotou z editu
+
   const deleteUser = (userId: number) => {
     setFormData((prevData) => prevData.filter((data) => data.id !== userId));
+  };
+
+  const handleCreateUserModalState = () => {
+    setCreateUserModalState(!createUserModalState);
   };
 
   return (
     <ContentWrapper>
       <ContetHead>
         <HeadTitle>Users</HeadTitle>
-        <AddUserButton>
+        <AddUserButton onClick={handleCreateUserModalState}>
           <ButtonParagraph>Add new user</ButtonParagraph>
         </AddUserButton>
       </ContetHead>
@@ -79,6 +169,73 @@ const Users: React.FC = () => {
           </Filter>
         </Filters>
       </ContentFilters>
+      <StyledModal
+        isOpen={createUserModalState}
+        onRequestClose={handleCreateUserModalState}
+      >
+        <AddUserForm onSubmit={handleSubmit}>
+          <HeadTitle>Add new user</HeadTitle>
+          <FormInput>
+            Name
+            <input
+              type="text"
+              name="name"
+              value={currentValue.name}
+              onChange={handleChange}
+            />
+          </FormInput>
+
+          <FormInput>
+            Surname
+            <input
+              type="text"
+              name="surname"
+              value={currentValue.surname}
+              onChange={handleChange}
+            />
+          </FormInput>
+
+          <FormInput>
+            TargetHours
+            <input
+              type="number"
+              name="targetHours"
+              value={currentValue.targetHours}
+              onChange={handleChange}
+            />
+          </FormInput>
+
+          <FormInput>
+            UserPriority
+            <input
+              type="number"
+              name="userPriority"
+              value={currentValue.userPriority}
+              onChange={handleChange}
+            />
+          </FormInput>
+
+          <FormInput>
+            UserHourPayment
+            <select name="userHourPayment" onChange={handleChange}>
+              <option value="0">0</option>
+              <option value="100">100</option>
+              <option value="150">150</option>
+              <option value="200">200</option>
+              <option value="250">250</option>
+              <option value="300">300</option>
+              <option value="350">350</option>
+            </select>
+          </FormInput>
+          <button>SEND</button>
+        </AddUserForm>
+      </StyledModal>
+      <UserList
+        formData={userFormData}
+        onDeleteUser={deleteUser}
+        onEditUser={editUser}
+        onEditSubmit={handleEditSubmit}
+      ></UserList>
     </ContentWrapper>
     /*
     <div>
@@ -199,7 +356,7 @@ const AddUserButton = styled.button`
   cursor: pointer;
 `;
 
-const HeadTitle = styled.h1``;
+export const HeadTitle = styled.h1``;
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -211,6 +368,19 @@ const ContetHead = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const AddUserForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+`;
+
+export const FormInput = styled.label`
+  display: flex;
+  flex-direction: column;
 `;
 
 export default Users;

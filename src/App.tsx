@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Users from "./components/Users";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 function App() {
   return (
