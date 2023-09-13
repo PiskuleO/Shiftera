@@ -75,7 +75,7 @@ const Users: React.FC = () => {
   ) => {
     setFormData(
       userFormData.map((data) => {
-        if (data.id == editUserID) {
+        if (data.id === editUserID) {
           return {
             ...data,
             name: editedData.name,
@@ -230,65 +230,22 @@ const Users: React.FC = () => {
           <button>SEND</button>
         </AddUserForm>
       </StyledModal>
-      <UserList
-        formData={userFormData}
-        onDeleteUser={deleteUser}
-        onEditUser={editUser}
-        onEditSubmit={handleEditSubmit}
-      ></UserList>
+      <UserListWrapper>
+        <UserList
+          formData={userFormData}
+          onDeleteUser={deleteUser}
+          onEditUser={editUser}
+          onEditSubmit={handleEditSubmit}
+        ></UserList>
+      </UserListWrapper>
     </ContentWrapper>
-    /*
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={currentValue.name}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          Surname:
-          <input
-            type="text"
-            name="surname"
-            value={currentValue.surname}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          TargetHours:
-          <input
-            type="number"
-            name="targetHours"
-            value={currentValue.targetHours}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          UserHourPayment:
-          <select name="userHourPayment" onChange={handleChange}>
-            <option value="0">0</option>
-            <option value="100">100</option>
-            <option value="150">150</option>
-            <option value="200">200</option>
-            <option value="250">250</option>
-            <option value="300">300</option>
-            <option value="350">350</option>
-          </select>
-        </label>
-      </form>
-      <button onClick={handleSubmit}>SEND</button>
-      <UsersList formData={UserFormData} onDeleteUser={deleteUser}></UsersList>
-    </div>
-    */
   );
 };
+
+const UserListWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 const Filters = styled.div`
   display: flex;
   flex-direction: row;

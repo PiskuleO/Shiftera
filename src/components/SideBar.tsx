@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import SupervisedUserCircleOutlinedIcon from "@mui/icons-material/SupervisedUserCircleOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import BookOutlinedIcon from "@mui/icons-material/BookOutlined";
+import { ReactComponent as HomeIc } from "../Home.svg";
+import { ReactComponent as UsersIc } from "../NavbarUsers.svg";
+import { ReactComponent as ShiftsIc } from "../Shifts.svg";
+import { ReactComponent as SettingsIc } from "../Settings.svg";
 
 const SideBar: React.FC = () => {
   return (
@@ -11,26 +11,26 @@ const SideBar: React.FC = () => {
       <MainItems>
         <SideLink to="/">
           <Icon>
-            <HomeOutlinedIcon sx={{ fontSize: 50 }}></HomeOutlinedIcon>
+            <HomeIc></HomeIc>
           </Icon>
         </SideLink>
+        <IconSpacer></IconSpacer>
         <SideLink to="/users">
           <Icon>
-            <SupervisedUserCircleOutlinedIcon
-              sx={{ fontSize: 50 }}
-            ></SupervisedUserCircleOutlinedIcon>
+            <UsersIc></UsersIc>
           </Icon>
         </SideLink>
+        <IconSpacer></IconSpacer>
         <SideLink to="/shifts">
           <Icon>
-            <BookOutlinedIcon sx={{ fontSize: 50 }}></BookOutlinedIcon>
+            <ShiftsIc></ShiftsIc>
           </Icon>
         </SideLink>
       </MainItems>
       <SettingItem>
         <SideLink to="/settings">
           <Icon>
-            <SettingsOutlinedIcon sx={{ fontSize: 50 }}></SettingsOutlinedIcon>
+            <SettingsIc></SettingsIc>
           </Icon>
         </SideLink>
       </SettingItem>
@@ -39,6 +39,10 @@ const SideBar: React.FC = () => {
 };
 
 export default SideBar;
+
+const IconSpacer = styled.div`
+  padding: 1rem;
+`;
 const SettingItem = styled.div``;
 
 const MainItems = styled.div`
@@ -46,10 +50,14 @@ const MainItems = styled.div`
 `;
 
 const Icon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1.5rem;
   :hover {
-    background-color: #48e5da;
+    background-color: #adfffa;
     border-radius: 1rem;
+    transition: 0.5s;
   }
 `;
 

@@ -69,7 +69,6 @@ const User: React.FC<UserProps> = ({
   userHourPayment,
   userPriority,
   onDelete,
-  onEdit,
   handleEditSubmit,
 }) => {
   useEffect(() => {
@@ -159,39 +158,53 @@ const User: React.FC<UserProps> = ({
               <option value="350">350</option>
             </select>
           </FormInput>
-          <button>SEND</button>
+          <button>Edit user</button>
         </AddUserForm>
       </StyledModal>
-      <NameTd>{name}</NameTd>
-      <NameTd>{surname}</NameTd>
-      <HoursColumn>
-        <span>{targetHours} hours</span>
-        <MonthPayment>{targetHours * userHourPayment} CZK / month</MonthPayment>
-      </HoursColumn>
-      <td>{userPriority}</td>
-      <ButtonsTd>
-        <UserButton onClick={() => setModalOpen(!modalOpen)}>
-          <EditOutlinedIcon></EditOutlinedIcon>
-        </UserButton>
-        <ButtonSpacer></ButtonSpacer>
-        <UserButton onClick={() => onDelete(id)}>
-          <ClearOutlinedIcon></ClearOutlinedIcon>
-        </UserButton>
-      </ButtonsTd>
+      <TableTd>
+        <NameDataCell>{name}</NameDataCell>
+      </TableTd>
+      <TableTd>
+        <NameDataCell>{surname}</NameDataCell>
+      </TableTd>
+      <TableTd>
+        <HoursColumn>
+          <span>{targetHours} hours</span>
+          <MonthPayment>
+            {targetHours * userHourPayment} CZK / month
+          </MonthPayment>
+        </HoursColumn>
+      </TableTd>
+      <TableTd>{userPriority}</TableTd>
+      <TableTd>
+        <ButtonsDataCell>
+          <UserButton onClick={() => setModalOpen(!modalOpen)}>
+            <EditOutlinedIcon></EditOutlinedIcon>
+          </UserButton>
+          <ButtonSpacer></ButtonSpacer>
+          <UserButton onClick={() => onDelete(id)}>
+            <ClearOutlinedIcon></ClearOutlinedIcon>
+          </UserButton>
+        </ButtonsDataCell>
+      </TableTd>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.tr``;
 
-const HoursColumn = styled.td``;
+const HoursColumn = styled.div``;
 
 const MonthPayment = styled.p`
   margin: 0;
   font-size: 12px;
 `;
 
-const NameTd = styled.td`
+const TableTd = styled.td`
+  padding-top: 1rem;
+`;
+
+const NameDataCell = styled.div`
   text-align: left;
 `;
 
@@ -203,7 +216,7 @@ const UserButton = styled.button`
   flex-direction: row;
   cursor: pointer;
   border-radius: 10px;
-  background: var(--gerrn, #48e5da);
+  background: #48e5da;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
   border: 0;
   width: 50px;
@@ -211,7 +224,7 @@ const UserButton = styled.button`
   padding: 0;
 `;
 
-const ButtonsTd = styled.td`
+const ButtonsDataCell = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

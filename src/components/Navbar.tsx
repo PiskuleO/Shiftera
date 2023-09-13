@@ -1,18 +1,19 @@
 import styled from "@emotion/styled";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import LogoImage from "../LogoMockup.png";
+import { ReactComponent as AccountIc } from "../Users.svg";
+import { ReactComponent as NotificationIc } from "../Notifications.svg";
 
 const Navbar: React.FC = () => {
   return (
     <NavbarHeader>
       <NavbarNav>
-        Shiftera
+        <Logo src={LogoImage} />
         <RightIcons>
           <Icon>
-            <NotificationsNoneOutlinedIcon sx={{ fontSize: 30 }} />
+            <NotificationIc height="2.5rem"></NotificationIc>
           </Icon>
           <Icon>
-            <AccountCircleOutlinedIcon sx={{ fontSize: 75 }} />
+            <AccountIc height="5rem"></AccountIc>
           </Icon>
         </RightIcons>
       </NavbarNav>
@@ -36,7 +37,7 @@ const NavbarNav = styled.nav`
   ::after {
     content: " ";
     background: linear-gradient(180deg, #7476fd 0%, #48e5da 100%);
-    height: 2px;
+    height: 1px;
     width: calc(100% - 2 * 10rem);
     position: absolute;
     bottom: var(--extra-padding-bottom);
@@ -59,6 +60,10 @@ const RightIcons = styled.div`
 const NavbarHeader = styled.header`
   position: sticky;
   top: 0;
+`;
+
+const Logo = styled.img`
+  height: 2.5rem;
 `;
 
 export default Navbar;

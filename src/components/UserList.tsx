@@ -1,7 +1,8 @@
-import React, { FormEvent, useEffect } from "react";
+import React, { FormEvent } from "react";
 import User from "./User";
 import { UserFormData, UserFormDataWithoutId } from "./Users";
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 type UsersListProps = {
   formData: UserFormData[];
@@ -22,15 +23,15 @@ const UserList: React.FC<UsersListProps> = ({
 }) => {
   return (
     <UserTable>
-      <thead>
+      <UserTableHead>
         <UserTableTr>
           <NameTh>Name</NameTh>
           <NameTh>Surname</NameTh>
           <HoursTH>TargetHours</HoursTH>
           <UserTableTh>Priority level</UserTableTh>
         </UserTableTr>
-      </thead>
-      <tbody>
+      </UserTableHead>
+      <UserTableBody>
         {formData.map((user) => (
           <User
             id={user.id}
@@ -45,19 +46,34 @@ const UserList: React.FC<UsersListProps> = ({
             handleEditSubmit={onEditSubmit}
           />
         ))}
-      </tbody>
+      </UserTableBody>
     </UserTable>
   );
 };
 
 const UserTable = styled.table`
   text-align: center;
+  width: 80%;
 `;
+
+const UserTableHead = styled.thead``;
 
 const HoursTH = styled.th``;
 
 const UserTableTh = styled.th``;
-const UserTableTr = styled.tr``;
+const UserTableTr = styled.tr`
+  position: relative;
+  ::after {
+    content: " ";
+    background: linear-gradient(180deg, #7476fd 0%, #48e5da 100%);
+    height: 1px;
+    width: calc(100%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+`;
+const UserTableBody = styled.tbody``;
 
 const NameTh = styled.th`
   text-align: left;
