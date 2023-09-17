@@ -51,6 +51,11 @@ const UserList: React.FC<UsersListProps> = ({
   );
 };
 
+const thStyle = css`
+  font-weight: 400;
+  font-size: 1.2rem;
+`;
+
 const UserTable = styled.table`
   text-align: center;
   width: 80%;
@@ -58,9 +63,19 @@ const UserTable = styled.table`
 
 const UserTableHead = styled.thead``;
 
-const HoursTH = styled.th``;
+const HoursTH = styled.th`
+  ${thStyle}
+`;
 
-const UserTableTh = styled.th``;
+const NameTh = styled.th`
+  ${thStyle}
+  text-align: left;
+`;
+
+const UserTableTh = styled.th`
+  ${thStyle}
+`;
+
 const UserTableTr = styled.tr`
   position: relative;
   ::after {
@@ -73,9 +88,7 @@ const UserTableTr = styled.tr`
     left: 0;
   }
 `;
+
 const UserTableBody = styled.tbody``;
 
-const NameTh = styled.th`
-  text-align: left;
-`;
 export default UserList;

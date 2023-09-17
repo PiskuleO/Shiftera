@@ -6,7 +6,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import {
   AddUserForm,
-  FormInput,
+  FormLabel,
   HeadTitle,
   UserFormDataWithoutId,
 } from "./Users";
@@ -41,7 +41,7 @@ const StyledModal = (props: ReactModal.Props) => (
           background: #fff;
           -webkit-overflow-scrolling: touch;
           border-radius: 15px;
-          padding: 20px;
+          padding: 40px;
           box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.25);
         `}
         overlayClassName={css`
@@ -106,7 +106,7 @@ const User: React.FC<UserProps> = ({
       >
         <AddUserForm onSubmit={(e) => handleEditSubmit(e, id, editedData)}>
           <HeadTitle>Edit user</HeadTitle>
-          <FormInput>
+          <FormLabel>
             Name
             <input
               type="text"
@@ -114,9 +114,9 @@ const User: React.FC<UserProps> = ({
               value={editedData.name}
               onChange={handleChange}
             />
-          </FormInput>
+          </FormLabel>
 
-          <FormInput>
+          <FormLabel>
             Surname
             <input
               type="text"
@@ -124,9 +124,9 @@ const User: React.FC<UserProps> = ({
               value={editedData.surname}
               onChange={handleChange}
             />
-          </FormInput>
+          </FormLabel>
 
-          <FormInput>
+          <FormLabel>
             TargetHours
             <input
               type="number"
@@ -134,9 +134,9 @@ const User: React.FC<UserProps> = ({
               value={editedData.targetHours}
               onChange={handleChange}
             />
-          </FormInput>
+          </FormLabel>
 
-          <FormInput>
+          <FormLabel>
             UserPriority
             <input
               type="number"
@@ -144,20 +144,18 @@ const User: React.FC<UserProps> = ({
               value={editedData.userPriority}
               onChange={handleChange}
             />
-          </FormInput>
+          </FormLabel>
 
-          <FormInput>
-            UserHourPayment
-            <select name="userHourPayment" onChange={handleChange}>
-              <option value="0">0</option>
-              <option value="100">100</option>
-              <option value="150">150</option>
-              <option value="200">200</option>
-              <option value="250">250</option>
-              <option value="300">300</option>
-              <option value="350">350</option>
-            </select>
-          </FormInput>
+          <FormLabel>UserHourPayment</FormLabel>
+          <select name="userHourPayment" onChange={handleChange}>
+            <option value="0">0</option>
+            <option value="100">100</option>
+            <option value="150">150</option>
+            <option value="200">200</option>
+            <option value="250">250</option>
+            <option value="300">300</option>
+            <option value="350">350</option>
+          </select>
           <button>Edit user</button>
         </AddUserForm>
       </StyledModal>

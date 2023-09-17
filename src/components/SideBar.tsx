@@ -41,9 +41,11 @@ const SideBar: React.FC = () => {
 export default SideBar;
 
 const IconSpacer = styled.div`
-  padding: 1rem;
+  padding-top: 3.5rem;
 `;
-const SettingItem = styled.div``;
+const SettingItem = styled.div`
+  width: 100%;
+`;
 
 const MainItems = styled.div`
   padding-top: 8rem;
@@ -53,10 +55,10 @@ const Icon = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1rem;
   :hover {
     background-color: #adfffa;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     transition: 0.5s;
   }
 `;
@@ -69,5 +71,15 @@ const SideBarWrapper = styled.div`
   height: 100vh;
   position: sticky;
   top: 0;
+
+  ::after {
+    content: " ";
+    background: linear-gradient(180deg, #7476fd 0%, #48e5da 100%);
+    height: 100%;
+    width: 1px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 `;
 const SideLink = styled(Link)``;

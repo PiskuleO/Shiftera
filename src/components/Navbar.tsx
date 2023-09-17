@@ -59,6 +59,7 @@ const RightIcons = styled.div`
 
 const NavbarHeader = styled.header`
   position: sticky;
+  z-index: 1;
   top: 0;
 `;
 
