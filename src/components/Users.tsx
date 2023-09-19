@@ -216,11 +216,7 @@ const Users: React.FC = () => {
           <FormItem>
             <FormLabel>
               UserHourPayment
-              <FormSelect
-                className="lastLabel"
-                name="userHourPayment"
-                onChange={handleChange}
-              >
+              <FormSelect name="userHourPayment" onChange={handleChange}>
                 <option value="0">0</option>
                 <option value="100">100</option>
                 <option value="150">150</option>
