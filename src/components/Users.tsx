@@ -216,7 +216,11 @@ const Users: React.FC = () => {
           <FormItem>
             <FormLabel>
               UserHourPayment
-              <select name="userHourPayment" onChange={handleChange}>
+              <FormSelect
+                className="lastLabel"
+                name="userHourPayment"
+                onChange={handleChange}
+              >
                 <option value="0">0</option>
                 <option value="100">100</option>
                 <option value="150">150</option>
@@ -224,7 +228,7 @@ const Users: React.FC = () => {
                 <option value="250">250</option>
                 <option value="300">300</option>
                 <option value="350">350</option>
-              </select>
+              </FormSelect>
             </FormLabel>
           </FormItem>
           <FormButtonSpacer></FormButtonSpacer>
@@ -287,8 +291,8 @@ const SearchBar = styled.div`
 const SearchInput = styled.input`
   font-family: Montserrat;
   border: 0;
-  border-bottom: 1px solid black;
-  color: #48e5da;
+  border-bottom: 1px solid #48e5da;
+  outline: none;
 `;
 
 const AddUserButton = styled.button`
@@ -347,7 +351,18 @@ export const FormLabel = styled.label`
   flex-direction: column;
 `;
 
-export const FormInput = styled.input``;
+export const FormInput = styled.input`
+  border: 0;
+  border-bottom: 1px solid #56c0e5;
+  outline: none;
+`;
+
+export const FormSelect = styled.select`
+  border: 0;
+  border-bottom: 1px solid #56c0e5;
+  outline: none;
+  cursor: pointer;
+`;
 
 export const FormButtonSpacer = styled.div`
   padding-top: 2rem;
@@ -356,7 +371,6 @@ export const FormButton = styled.button`
   border-radius: 10px;
   background: #48e5da;
   color: white;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
   border: 0;
   margin: 0;
   width: 200px;
