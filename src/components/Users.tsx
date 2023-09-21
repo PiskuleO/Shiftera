@@ -132,12 +132,12 @@ const Users: React.FC = () => {
 
   return (
     <ContentWrapper>
-      <ContetHead>
+      <ContentHead>
         <HeadTitle>Users</HeadTitle>
-        <AddUserButton onClick={handleCreateUserModalState}>
+        <LargeButton onClick={handleCreateUserModalState}>
           <ButtonParagraph>Add new user</ButtonParagraph>
-        </AddUserButton>
-      </ContetHead>
+        </LargeButton>
+      </ContentHead>
       <ContentFilters>
         <SearchBar>
           <Icon>
@@ -291,7 +291,7 @@ const SearchInput = styled.input`
   outline: none;
 `;
 
-const AddUserButton = styled.button`
+export const LargeButton = styled.button`
   border-radius: 10px;
   background: #48e5da;
   color: white;
@@ -305,7 +305,7 @@ const AddUserButton = styled.button`
   cursor: pointer;
 `;
 
-const ButtonParagraph = styled.p`
+export const ButtonParagraph = styled.p`
   margin: 0;
   color: #fff;
   text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
@@ -316,12 +316,12 @@ const ButtonParagraph = styled.p`
   line-height: normal;
 `;
 
-const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const ContetHead = styled.div`
+export const ContentHead = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
