@@ -57,8 +57,8 @@ const thStyle = css`
 `;
 
 const UserTable = styled.table`
-  text-align: center;
   width: 80%;
+  text-align: center;
 `;
 
 const UserTableHead = styled.thead``;
@@ -89,6 +89,8 @@ const UserTableTr = styled.tr`
   }
 `;
 
-const UserTableBody = styled.tbody``;
+const UserTableBody = styled.tbody`
+  overflow-y: scroll;
+`;
 
 export default UserList;
