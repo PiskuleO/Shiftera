@@ -2,12 +2,15 @@ import styled from "@emotion/styled";
 import LogoImage from "../LogoMockup.png";
 import { ReactComponent as AccountIc } from "../Users.svg";
 import { ReactComponent as NotificationIc } from "../Notifications.svg";
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
     <NavbarHeader>
       <NavbarNav>
+        <NavLink to="/" >
         <Logo src={LogoImage} />
+          </NavLink>
         <RightIcons>
           <Icon>
             <NotificationIc height="2.5rem"></NotificationIc>
@@ -66,5 +69,7 @@ const NavbarHeader = styled.header`
 const Logo = styled.img`
   height: 2.5rem;
 `;
+
+const NavLink = styled(Link)``;
 
 export default Navbar;

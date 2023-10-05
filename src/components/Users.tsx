@@ -68,6 +68,8 @@ const Users: React.FC = () => {
 
   const [userFormData, setFormData] = useState<UserFormData[]>([]);
 
+  const [userSearchInput, setUserSearchInput] = useState("");
+
   const handleEditSubmit = (
     e: FormEvent,
     editUserID: number,
@@ -144,6 +146,8 @@ const Users: React.FC = () => {
             <SearchOutlinedIcon sx={{ color: `#48E5DA` }}></SearchOutlinedIcon>
           </Icon>
           <SearchInput
+            value={userSearchInput}
+            onChange={(e) => setUserSearchInput(e.target.value)}
             type="text"
             placeholder="Type a phrase to search"
           ></SearchInput>
@@ -287,7 +291,7 @@ const SearchBar = styled.div`
 const SearchInput = styled.input`
   font-family: Montserrat;
   border: 0;
-  border-bottom: 1px solid #48e5da;
+  border-bottom: 1px solid #659bf1;
   outline: none;
 `;
 
